@@ -1,6 +1,6 @@
 {
   "name": "material-dashboard-2-react",
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost:4000",
   "version": "2.1.0",
   "private": true,
   "author": "Creative Tim",
@@ -40,6 +40,7 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "react-table": "7.7.0",
+    "react-toastify": "^9.1.3",
     "stylis": "4.0.13",
     "stylis-plugin-rtl": "2.1.1",
     "web-vitals": "2.1.4",

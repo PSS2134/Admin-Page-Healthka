@@ -13,6 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
+import { NavLink } from "react-router-dom";
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
 
@@ -23,9 +24,12 @@ import Icon from "@mui/material/Icon";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 
-function Invoice({ date, id, price, noGutter }) {
+
+function Invoice({ date, id, price, name,contact, noGutter }) {
   return (
+    <NavLink to={`/orders/detail/${id}`}>
     <MDBox
+    className="invoice-box"
       component="li"
       display="flex"
       justifyContent="space-between"
@@ -42,6 +46,14 @@ function Invoice({ date, id, price, noGutter }) {
           {id}
         </MDTypography>
       </MDBox>
+      <MDBox>
+        <MDTypography  variant="caption" display="block" color="blue" style={{"color":"#2D4356","fontWeight":"500","fontSize":"15px"}}>
+          {name}
+        </MDTypography>
+        <MDTypography variant="caption" fontWeight="regular" color="text">
+          {contact}
+        </MDTypography>
+      </MDBox>
       <MDBox display="flex" alignItems="center">
         <MDTypography variant="button" fontWeight="regular" color="text">
           {price}
@@ -54,6 +66,7 @@ function Invoice({ date, id, price, noGutter }) {
         </MDBox>
       </MDBox>
     </MDBox>
+    </NavLink>
   );
 }
 
@@ -67,6 +80,8 @@ Invoice.propTypes = {
   date: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  contact: PropTypes.number.isRequired,
   noGutter: PropTypes.bool,
 };
 

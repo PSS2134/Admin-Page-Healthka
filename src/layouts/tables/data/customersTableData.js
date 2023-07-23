@@ -28,13 +28,29 @@ import team4 from "assets/images/team-4.jpg";
 import { Dvr, Style } from "@mui/icons-material";
 import  "layouts/tables/data/customersTableData.css";
 import divider from "assets/theme/components/divider";
+import { useEffect,useState } from "react";
 
 export default function data() {
 
+  const [userData, setUserData]=useState([]);
+  const [errorMsg, setErrorMsg]=useState("");
+
+  useEffect(()=>{
+    fetch("http://localhost:4000/api/user/admin/getAllCustomers").then(res=>res.json()).then(datas=>{
+      if(datas.apiSuccess && datas.resSuccess)
+      {
+        console.log(datas.result);
+        setUserData(datas.result);
+      }
+      else{
+        setErrorMsg(datas.message);
+      }
+    }).catch(err=>setErrorMsg(err));
+  },[])
  
   const Author = ({ image, name, email }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
-      <MDAvatar src={image} name={name} size="sm" />
+      <MDAvatar src=  "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg" name={name} size="sm" />
       <MDBox ml={2} lineHeight={1}>
         <MDTypography display="block" variant="button" fontWeight="medium">
           {name}
@@ -52,6 +68,50 @@ export default function data() {
       <MDTypography variant="caption">{description}</MDTypography>
     </MDBox>
   );
+// Assuming you have an array of user data called 'userData'
+// const userData = [
+//   { UID: '6666666666', customer: 'John Michael', phone: '1111111111', status: 'online' },
+//   { UID: '6666666666', customer: 'John Michael', phone: '1111111111', status: 'online' },
+//   { UID: '6666666666', customer: 'John Michael', phone: '1111111111', status: 'online' },
+//   // Add more user data objects here...
+// ];
+
+// Map the userData array to generate table rows
+const tableRows = userData.map((user) => 
+({
+    UID: (
+      <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+        {user.CustomerID}
+      </MDTypography>
+    ),
+    customer: (
+      <div className="namebox">
+        <a href={`/billing/${user.CustomerID}`} alt="personalpage">
+          <Author image={team2} name= {user.FirstName} email="john@creative-tim.com" />
+        </a>
+      </div>
+    ),
+    status: (
+      <MDBox ml={-1}>
+        <MDBadge badgeContent={user.status} color="success" variant="gradient" size="sm" />
+      </MDBox>
+    ),
+    phone: (
+      <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+        {user.PhoneNumber}
+      </MDTypography>
+    ),
+    action: (
+      <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+        Edit
+      </MDTypography>
+    ),
+  })
+);
+
+// // Use the 'tableRows' array in your table component
+// // Assuming you have a table component called 'MyTable'
+// <MyTable columns={columns} rows={tableRows} />;
 
   return {
     columns: [
@@ -62,144 +122,6 @@ export default function data() {
       { Header: "action", accessor: "action", align: "center" },
     ],
 
-    rows: [
-      {UID: (
-        <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-          6666666666
-        </MDTypography>
-      ),
-      
-        customer: <div className="namebox"><a href="/billing" alt="personalpage"><Author image={team2} name="John Michael" email="john@creative-tim.com" /></a></div>,
-        status: (
-          <MDBox ml={-1}>
-            <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
-          </MDBox>
-        ),
-        phone: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            1111111111
-          </MDTypography>
-        ),
-        action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </MDTypography>
-        ),
-      },
-      {
-        UID: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            6666666666
-          </MDTypography>
-        ),
-        customer: <div className="namebox"><a href="/billing" alt="personalpage"><Author image={team3} name="Alexa Liras" email="alexa@creative-tim.com" /></a></div>,
-        
-        status: (
-          <MDBox ml={-1}>
-            <MDBadge badgeContent="offline" color="dark" variant="gradient" size="sm" />
-          </MDBox>
-        ),
-        phone: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            2222222222
-          </MDTypography>
-        ),
-        action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </MDTypography>
-        ),
-      },
-      {UID: (
-        <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-          6666666666
-        </MDTypography>
-      ),
-        customer: <div className="namebox"><a href="/billing" alt="personalpage"><Author image={team4} name="Laurent Perrier" email="laurent@creative-tim.com" /></a></div>,
-        
-        status: (
-          <MDBox ml={-1}>
-            <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
-          </MDBox>
-        ),
-        phone: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            3333333333
-          </MDTypography>
-        ),
-        action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </MDTypography>
-        ),
-      },
-      {UID: (
-        <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-          6666666666
-        </MDTypography>
-      ),
-        customer:<div className="namebox"><a href="/billing" alt="personalpage"> <Author className="customerbox" image={team3} name="Michael Levi" email="michael@creative-tim.com" /></a></div>,
-        status: (
-          <MDBox ml={-1}>
-            <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
-          </MDBox>
-        ),
-        phone: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            4444444444
-          </MDTypography>
-        ),
-        action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </MDTypography>
-        ),
-      },
-      {UID: (
-        <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-          6666666666
-        </MDTypography>
-      ),
-        customer: <div className="namebox"><a href="/billing" alt="personalpage"><Author image={team3} name="Richard Gran" email="richard@creative-tim.com" /></a></div>,
-        
-        status: (
-          <MDBox ml={-1}>
-            <MDBadge badgeContent="offline" color="dark" variant="gradient" size="sm" />
-          </MDBox>
-        ),
-        phone: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-           5555555555
-          </MDTypography>
-        ),
-        action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </MDTypography>
-        ),
-      },
-      {UID: (
-        <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-          6666666666
-        </MDTypography>
-      ),
-        customer: <div className="namebox"><a href="/billing" alt="personalpage"><Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" /></a></div>,
-        status: (
-          <MDBox ml={-1}>
-            <MDBadge badgeContent="offline" color="dark" variant="gradient" size="sm" />
-          </MDBox>
-        ),
-        phone: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            6666666666
-          </MDTypography>
-        ),
-        action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </MDTypography>
-        ),
-      },
-    ],
+    rows: tableRows // passing tableRows to rows as this row also contains array of the rows, instead of declaring tableRows and assigning it to rows directly map it here.
   };
 }

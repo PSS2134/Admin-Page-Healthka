@@ -1,36 +1,65 @@
-import React from 'react';
+
 import ReactDOM from 'react-dom';
 import Card from "@mui/material/Card";
 import "layouts/billing/components/customer_profile/customerprofile.css"
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
+const customerProfile=(props) => {
+const {customerid}=useParams();
+const [userData, setUserData]=useState();
+const [errorMsg, setErrorMsg]=useState("");
 
-const customerProfile=(props) => 
-    (
-        
-            <div className='profile'>
+useEffect(()=>{
+  fetch("http://localhost:4000/api/user/admin/getAllCustomers").then(res=>res.json()).then(datas=>{
+    if(datas.apiSuccess && datas.resSuccess)
+    {
+    //   console.log(datas.result);
+      datas.result.map((customer)=>{
+         if(customer.CustomerID===customerid)
+         {
+            setUserData(customer);
+           
+         }
+         return(<h1>Hemlo</h1>);
+      })
+    }
+    else{
+      setErrorMsg(datas.message);
+    }
+  }).catch(err=>setErrorMsg(err));
+},[])
+// console.log(customerid);
+console.log(userData);
+   return (
+    
+       <div className='profile'> 
+         {userData&&  <>
             <Card className='profile-container'>
             
-            <img className ="profile-img" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&w=1000&q=80" alt="" />
+            <img className ="profile-img" src=  "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg" alt="" />
             
             </Card>
             
             
             <Card className='cdetails'>
               <p id="detailsheading"> Customer Details</p>
-              <p className='detail'> UserId:{props.id} </p>
-              <p className='detail'> Name: {props.name}</p>
-              <p className='detail'> Contact:{props.conatct} </p>
-              <p className='detail'> Email:{props.email}</p>
-              <p className='detail'> Address:{props.address} </p>
-              <p className='detail'>Pincode:{props.pin} </p>
+              <p className='detail'> CustomerID: <span style={{"fontWeight":"600"}}>{userData.CustomerID}</span> </p>
+              <p className='detail'> Name: <span style={{"fontWeight":"600"}}>{userData.FirstName} {userData.LastName}</span></p>
+              <p className='detail'>Contact: <span style={{"fontWeight":"600"}}> {userData.PhoneNumber}</span> </p>
+              <p className='detail'>Email: <span style={{"fontWeight":"600"}}>{props.email}</span></p>
+              <p className='detail'>Address: <span style={{"fontWeight":"600"}}> {props.address}</span> </p>
+              <p className='detail'>Pincode: <span style={{"fontWeight":"600"}}>{props.pin} </span></p>
               </Card>
-        
+              </> 
           
             
+        }
         </div>
         
         
     )
+}
 
 
 export default customerProfile

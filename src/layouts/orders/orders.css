@@ -1,3 +1,5 @@
-.medicineinvoicecard{
-    height: 100%;
+
+.scroll-orders{
+    height: 70vh;
+    overflow-y: scroll;
 }

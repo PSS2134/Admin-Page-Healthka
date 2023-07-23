@@ -51,7 +51,7 @@ export default function data() {
   let datanew;
   const fetchData = async () => {
     try {
-      const response = await fetch("https://reqres.in/api/users/2", {
+      const response = await fetch("https://reqres.in/api/users?page=2", {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -109,41 +109,48 @@ export default function data() {
       { Header: "action", accessor: "action", align: "center" },
     ],
 
-    rows: [
-      {UID: (
-        <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-          6666666666
-        </MDTypography>
-      ),
+    rows: [1,2,3,4,5].map(()=>
+({UID: (
+        
+  <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" >
+ {1}
+</MDTypography>
+
+
+),
+
+driver:  
+<div className="namebox"><a href="/ambulancedriversprofile" alt="driverpersonalpage">
+ <Author image={team2} name={2} email="john@creative-tim.com" /></a></div>,
+location: (
+    <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+    Car
+  </MDTypography>
+),
+carnumber: (
+    <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+    1111111111
+  </MDTypography>
+  ),
+  status: (
+    <MDBox ml={-1}>
+      <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
+    </MDBox>
+  ),
+phone: (
+  <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+    1111111111
+  </MDTypography>
+),
+action: (
+  <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+    Edit
+  </MDTypography>
+),
+})
+    )
       
-        driver: <div className="namebox"><a href="/ambulancedriversprofile" alt="driverpersonalpage"><Author image={team2} name={1} email="john@creative-tim.com" /></a></div>,
-        location: (
-            <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Car
-          </MDTypography>
-        ),
-        carnumber: (
-            <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            1111111111
-          </MDTypography>
-          ),
-          status: (
-            <MDBox ml={-1}>
-              <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
-            </MDBox>
-          ),
-        phone: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            1111111111
-          </MDTypography>
-        ),
-        action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </MDTypography>
-        ),
-      },
      
-    ],
+    
   };
 }
