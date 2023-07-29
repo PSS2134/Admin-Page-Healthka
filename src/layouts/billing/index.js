@@ -72,7 +72,7 @@ function Billing() {
               </Grid>
             </Grid> */}
             <Grid item xs={12} lg={4}>
-              <Invoicesm class="medicineinvoicecard" title="Medicine Orders"/>
+              <Invoicesm scrollclassname="no-scroll" class="medicineinvoicecard" title="Medicine Orders"/>
             </Grid>
           </Grid>
         </MDBox>
@@ -82,7 +82,7 @@ function Billing() {
               <BillingInformation />
             </Grid>
             <Grid item xs={12} md={5}>
-              <Invoicesa class="ambulanceinvoicecard" title="Ambulance Orders"/>
+              <Invoicesa scrollclassname="no-scroll" class="ambulanceinvoicecard" title="Ambulance Orders"/>
             </Grid>
           </Grid>
         </MDBox>

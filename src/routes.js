@@ -53,7 +53,9 @@ import PatientsProfile from "layouts/billing/components/PrescriptionPortal/patie
 import MedicineDriversProfile from "layouts/driversprofile/MedicinedriversProfile";
 import OperatorsProfile from "layouts/operatorsprofile/operatorsprofile";
 import Orders from "layouts/orders/orders";
-
+import OrderForm from "layouts/orders/orderForm";
+import OrdersDetail from "layouts/orders/ordersDetail";
+import Medicine from "layouts/medicine/Medicine";
 
 
 // @mui icons
@@ -125,7 +127,7 @@ const routes = [
     name: "Customer Profile",
     key: "billing",
     icon: <Icon fontSize="small">receipt_long</Icon>,
-    route: "/billing",
+    route: "/billing/:customerid",
     component: <Billing />,
   },
   {
@@ -175,6 +177,20 @@ const routes = [
     route:"/form",
     component: <Form />,
 
+  },
+  {
+    // type: "collapse",
+    name: "medicineorder",
+    key: "medicineorder",
+    route: "/orders/add",
+    component: <Medicine/>,
+  },
+  {
+    // type: "collapse",
+    name: "orderDetail",
+    key: "orderDetail",
+    route: "/orders/detail/:orderid",
+    component: <OrdersDetail />,
   },
   {
     name:"ambulancedriversprofile",

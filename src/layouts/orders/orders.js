@@ -76,10 +76,10 @@ function Orders(){
               </Grid>
             </Grid> */}
             <Grid item xs={12} lg={6} ml={0}>
-              <Invoicesm class="medicineinvoicecard" title="Medicine Orders"/>
+              <Invoicesm scrollclassname="scroll-orders" class="medicineinvoicecard" title="Medicine Orders" name="Priyansh" contact="9223456718"/>
             </Grid>
             <Grid item xs={14} lg={6} ml={0}>
-              <Invoicesm class="medicineinvoicecard" title="Ambulance Orders"/>
+              <Invoicesa scrollclassname="scroll-orders" class="medicineinvoicecard" title="Ambulance Orders" name="Priyansh" contact="9223456718"/>
             </Grid>
           </Grid>
         </MDBox>
